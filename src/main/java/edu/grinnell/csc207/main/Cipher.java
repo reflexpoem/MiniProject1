@@ -1,3 +1,17 @@
+/// TODO (fail test)
+//
+/// $ Cipher -vigenere -decode -vigenere hello
+/// Error: strings must be only lowercase letters
+//
+/// $ Cipher -vigenere -deecode vigenere hello
+/// Error: No valid action specified.  Legal values are '-encode' and '-decode'
+//
+/// $ Cipher -encde -caesar a ""
+/// Error: No valid action specified.  Legal values are '-encode' and '-decode'
+//
+/// $ Cipher -encode -vigenere alphabet ""
+/// Error: Empty keys are not permitted
+
 package edu.grinnell.csc207.main;
 
 import java.io.PrintWriter;
@@ -16,6 +30,8 @@ public class Cipher {
 
     if(args.length != 4) {
 			System.err.println("Error: Expect 4 parameters, received " + args.length);
+      pen.close();
+      return;
 		}
 
 		for(int i = 0; i < args.length; i++) {
@@ -40,6 +56,7 @@ public class Cipher {
 		if ((cipher.equals("-caesar") && key.length() != 1)) {
       System.err.println("Error: caesar ciphers require a one-chracter key");
       pen.close();
+      return;
     }
 
 		// Switch between action and cipher type
